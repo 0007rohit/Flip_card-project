@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial Calculator</title>
+    <link rel="stylesheet" href="card.css">
+</head>
+<body>
+    <div class="card">
+        <div class="flip-trigger">More info</div> 
+        <div class="card-inner">
+            <div class="card-front">
+                <h2>Factorial Calculator</h2>
+                <input id="numberInput" type="number" placeholder="Enter a number" />
+                <button onclick="calculateFactorial()">Calculate</button>
+                <div class="output" id="output"></div>
+            </div>
+            <div class="card-back">
+                <h2>More Info</h2>
+                <p>Factorial is the product of an integer and all the integers below it.</p>
+                <p>Methods: Iterative & Recursive</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateInput(number) {
+            if (isNaN(number) || number < 0 || !Number.isInteger(parseFloat(number))) {
+                alert("Please enter a valid positive integer.");
+                return false;
+            }
+            return true;
+        }
+
+        function iterativeFactorial(num) {
+            let result = 1;
+            for (let i = 2; i <= num; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        function recursiveFactorial(num) {
+            if (num === 0 || num === 1) {
+                return 1;
+            }
+            return num * recursiveFactorial(num - 1);
+        }
+
+        function calculateFactorial() {
+            const number = document.getElementById("numberInput").value;
+            if (!validateInput(number)) return;
+            const iterative = iterativeFactorial(number);
+            const recursive = recursiveFactorial(number);
+            document.getElementById("output").innerHTML = `Iterative: ${iterative}<br>Recursive: ${recursive}`;
+        }
+    </script>
+</body>
+</html>
